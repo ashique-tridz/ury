@@ -770,6 +770,7 @@ def getPosProfile():
         edit_order_type = pos_profiles.custom_edit_order_type
         enable_kot_reprint = pos_profiles.custom_enable_kot_reprint
         invoice_warning_time = pos_profiles.custom_invoice_warning_time or 0
+        disable_print_status_tracking = getattr(pos_profiles, "custom_disable_print_status_tracking", 0)
         if multiple_cashier:
             details = getBranchRoom()
             room = details[0].get('name') 
@@ -849,7 +850,8 @@ def getPosProfile():
         "owner":owner,
         "edit_order_type":edit_order_type,
         "enable_kot_reprint":enable_kot_reprint,
-        "custom_invoice_warning_time":invoice_warning_time
+        "custom_invoice_warning_time":invoice_warning_time,
+        "custom_disable_print_status_tracking":disable_print_status_tracking
 
     }
 
@@ -2499,3 +2501,12 @@ def ensure_payment_mode_accounts(modes, company):
         _ensure_mode_of_payment(mode, company)
         ensured.append(mode)
     return ensured
+
+
+@frappe.whitelist(allow_guest=False)
+def is_printer_watch_installed() -> dict:
+    try:
+        installed = "ury_printer_watch" in frappe.get_installed_apps()
+    except Exception:
+        installed = False
+    return {"installed": bool(installed)}

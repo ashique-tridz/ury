@@ -401,6 +401,13 @@ def get_custom_fields():
 				"insert_after": "qz_print",
 				"label": "QZ Host",
 				"translatable": 0,
+			},
+			{
+				"fieldname": "custom_disable_print_status_tracking",
+				"fieldtype": "Check",
+				"insert_after": "qz_host",
+				"label": "Disable Print & Printer Status Tracking",
+				"description": "When enabled, hides the printer status indicator in POS.",
 			}
 		],
   

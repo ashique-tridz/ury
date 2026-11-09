@@ -23,6 +23,7 @@ export interface PosProfileLimited {
   owner: string;
   edit_order_type?: number;
   custom_invoice_warning_time?: number;
+  custom_disable_print_status_tracking?: number | boolean;
 }
 
 export interface PosProfileLimitedResponse {
@@ -88,6 +89,7 @@ export interface PosProfileCombined extends PosProfileFull {
   view_all_status?: number;
   custom_daily_pos_close?: number;
   custom_invoice_warning_time?: number;
+  custom_disable_print_status_tracking?: number | boolean;
 }
 
 export interface Currency {
@@ -144,6 +146,7 @@ export async function getCombinedPosProfile(): Promise<PosProfileCombined> {
     multiple_cashier: limitedProfile.multiple_cashier,
     edit_order_type: limitedProfile.edit_order_type,
     custom_invoice_warning_time: limitedProfile.custom_invoice_warning_time ?? 0,
+    custom_disable_print_status_tracking: limitedProfile.custom_disable_print_status_tracking ?? 0,
   };
 
   return combinedProfile;
